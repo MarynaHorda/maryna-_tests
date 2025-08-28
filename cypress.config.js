@@ -4,15 +4,15 @@ module.exports = defineConfig({
    watchForFileChanges: false,
    env: {
     baseUrl: "https://www.redmine.org",
-    userName: "Barabulka",
-    password: "Barabulka",
-    login: "Barabulka",
-    passwordConfirmation: "Barabulka",
+    userName: "Barabulka2003",
+    password: "Barabulka2003",
+    login: "Barabulka2003",
+    passwordConfirmation: "Barabulka2003",
     firstName: "Barabulka",
     lastName: "Barabulka",
-    mail: "marynahorda2901@gmail.com",
-    newPassword: "Barabulka",
-    newPasswordConfirmation: "Barabulka",
+    mail: "maryna.h@jetbase.io",
+    newPassword: "Barabulka2003",
+    newPasswordConfirmation: "Barabulka2003",
    },
 
    e2e: {

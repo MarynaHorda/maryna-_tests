@@ -5,11 +5,11 @@ cy.get('.logout').click()
 }
 
 verifyLoggedAsText() {
-cy.get('#loggedas').should('have.text', 'Увійшов як Barabulka');
+cy.get('#loggedas').should('have.text', 'Logged in as Barabulka2003');
 }
 
 verifyLogoutBtn() {
-cy.get('.logout').should('have.text', 'Вийти');
+cy.get('.logout').should('have.text', 'Sign out');
 }
 
 clickNewObjectBtn() {

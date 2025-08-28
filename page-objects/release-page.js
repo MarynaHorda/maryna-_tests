@@ -19,7 +19,7 @@ this.clickSendComBtn()
 
 verifyComAdded () {
 cy.get('#flash_notice')
-cy.contains('Коментар додано').should('be.visible');
+cy.contains('Comment added').should('be.visible');
 }
 
 }

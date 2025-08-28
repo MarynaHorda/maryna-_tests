@@ -16,7 +16,7 @@ this.clickSubmitBtn()
 }
 
 titleExist() {
-cy.contains(text.erroTitleExist).should('be.visible');
+cy.contains(text.errorTitleExist).should('be.visible');
 }
 
 }
