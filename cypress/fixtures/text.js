@@ -1,8 +1,8 @@
 export const text = {
-errorNoData: "Немає даних для відображення",
+errorNoData: "No data to display",
 errorNewPassword: "The new password must be different from the current password",
 errorTitleExist: "Title has already been taken",
 errorEmptyTitle: "Subject cannot be blank",
-errorMailExist: "Ел. пошта вже використовується",
-errorLoginExist: "Вхід вже використовується",
+errorMailExist: "Email has already been taken",
+errorLoginExist: "Login has already been taken",
 }

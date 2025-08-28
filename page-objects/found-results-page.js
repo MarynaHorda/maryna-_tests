@@ -19,9 +19,9 @@ this.clickSearchBtn()
 }
 
 verifyAmount() {
-cy.get('#content > h3').should('have.text', 'Результати (1)');
+cy.get('#content > h3').should('have.text', 'Results (1)');
 cy.get('dt').its('length').then((amount) => {
-cy.log('Результати: ' + amount);
+cy.log('Results: ' + amount);
 expect(amount).to.equal(1);
 })
 }

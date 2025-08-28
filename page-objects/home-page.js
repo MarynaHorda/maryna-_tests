@@ -9,11 +9,11 @@ cy.get('.register').click()
 }
 
 verifyLoginBtn() {
-cy.get('.login').should('have.text', 'Увійти')
+cy.get('.login').should('have.text', 'Sign in')
 }
 
 verifyRegisterBtn() {
-cy.get('.register').should('have.text', 'Зареєструватися')
+cy.get('.register').should('have.text', 'Register')
 }
 
 searchInfo(info) {
