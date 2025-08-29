@@ -3,7 +3,7 @@ class ReleasePage {
     cy.get('#content > :nth-child(7) > a').click()
   }
 
-  setComField(text) {
+  setComField(text:string) {
     cy.get('#comment_comments').type(text)
   }
 
@@ -11,7 +11,7 @@ class ReleasePage {
     cy.get('p > input').click()
   }
 
-  writeAndSendCom(text) {
+  writeAndSendCom(text:string) {
     this.setComField(text)
     this.clickSendComBtn()
   }

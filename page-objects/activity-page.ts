@@ -1,6 +1,6 @@
 import { text } from '../cypress/fixtures/text'
 class ActivityPage {
-  setDate(date) {
+  setDate(date:string) {
     cy.get('#from').type(date)
   }
 
@@ -12,7 +12,7 @@ class ActivityPage {
     cy.contains(text.errorNoData).should('be.visible')
   }
 
-  searchDate(date) {
+  searchDate(date:string) {
     this.setDate(date)
     this.clickApplyBtn()
   }

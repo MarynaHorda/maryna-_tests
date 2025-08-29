@@ -3,11 +3,11 @@ class LoginPage {
     cy.get('#login-submit').click()
   }
 
-  setUserName(name) {
+  setUserName(name:string) {
     cy.get('#username').type(name)
   }
 
-  setPassword(password) {
+  setPassword(password:string) {
     cy.get('#password').type(password)
   }
 
@@ -15,7 +15,7 @@ class LoginPage {
     cy.url().should('include', '/login')
   }
 
-  login(name, password) {
+  login(name:string, password:string) {
     this.setUserName(name)
     this.setPassword(password)
     this.clickLoginSubmitBtn()

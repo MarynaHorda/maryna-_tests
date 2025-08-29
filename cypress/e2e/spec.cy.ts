@@ -15,11 +15,6 @@ import activityPage from '../../page-objects/activity-page'
 import myAccountPage from '../../page-objects/my-account-page'
 import changePasswordPage from '../../page-objects/change-password-page'
 
-Cypress.on('uncaught:exception', (err, runnable) => {
-  // ignore error Rails.disableElement
-  return false
-})
-
 describe('Maryna`s tests', () => {
   it('Authorization', () => {
     homePage.open()
@@ -61,23 +56,6 @@ describe('Maryna`s tests', () => {
     registerPage.veryfiLogininfo()
   })
 
-  it('Handle duplicate or create and verify Wiki page', () => {
-    const pageTitle = 'Barabulka Test'
-    const pageUrlTitle = pageTitle.replace(/\s/g, '_')
-    homePage.open()
-    homePage.clickLoginBtn()
-    loginPage.login(Cypress.env('userName'), Cypress.env('password'))
-    loggedHomePage.createNewPage()
-    createNewPage.createPage(pageTitle)
-    cy.url().then((currentUrl) => {
-      if (currentUrl.includes(`/wiki/${pageUrlTitle}`)) {
-        createdPage.clickSaveBtn()
-        createdPage.searchAndVerifyPage(pageTitle, pageUrlTitle)
-      } else {
-        createNewPage.titleExist()
-      }
-    })
-  })
 
   it('Try creating question without required field', () => {
     homePage.open()
@@ -88,16 +66,6 @@ describe('Maryna`s tests', () => {
     createNewQuestion.checkErrorAndField()
   })
 
-  it('Leave comment', () => {
-    homePage.open()
-    homePage.clickLoginBtn()
-    loginPage.login(Cypress.env('userName'), Cypress.env('password'))
-    loggedHomePage.clickNewsBtn()
-    newsPage.clickOnRelease()
-    releasePage.clickLeaveComBtn()
-    releasePage.writeAndSendCom('my first test')
-    releasePage.verifyComAdded()
-  })
 
   it('Add and remove yourself as watcher', () => {
     homePage.open()

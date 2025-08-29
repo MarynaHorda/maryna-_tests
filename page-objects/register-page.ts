@@ -1,27 +1,27 @@
-import { text } from '../cypress/fixtures/text'
+import { text } from "cypress/fixtures/text"
 
 class RegisterPage {
-  setUserLogin(login) {
+  setUserLogin(login:string) {
     cy.get('#user_login').type(login)
   }
 
-  setUserPassword(password) {
+  setUserPassword(password:string) {
     cy.get('#user_password').type(password)
   }
 
-  setUserPasswordConfirmation(passwordConfirmation) {
+  setUserPasswordConfirmation(passwordConfirmation:string) {
     cy.get('#user_password_confirmation').type(passwordConfirmation)
   }
 
-  setUserFirstName(firstName) {
+  setUserFirstName(firstName:string) {
     cy.get('#user_firstname').type(firstName)
   }
 
-  setUserLastName(lastName) {
+  setUserLastName(lastName:string) {
     cy.get('#user_lastname').type(lastName)
   }
 
-  setUserMail(mail) {
+  setUserMail(mail:string) {
     cy.get('#user_mail').type(mail)
   }
 
@@ -37,7 +37,7 @@ class RegisterPage {
     cy.contains(text.errorLoginExist).should('be.visible')
   }
 
-  register(login, password, passwordConfirmation, firstName, lastName, mail) {
+  register(login:string, password:string, passwordConfirmation:string, firstName:string, lastName:string, mail:string) {
     this.setUserLogin(login)
     this.setUserPassword(password)
     this.setUserPasswordConfirmation(passwordConfirmation)
