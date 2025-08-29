@@ -1,24 +1,22 @@
-import { text } from "../cypress/fixtures/text";
+import { text } from '../cypress/fixtures/text'
 
-class CreateNewPage{
+class CreateNewPage {
+  setPageTitle(pageTitle) {
+    cy.get('#page_title').clear().type(pageTitle)
+  }
 
-setPageTitle(pageTitle) {
-cy.get('#page_title').clear().type(pageTitle);
+  clickSubmitBtn() {
+    cy.get('[type="submit"]').click()
+  }
+
+  createPage(pageTitle) {
+    this.setPageTitle(pageTitle)
+    this.clickSubmitBtn()
+  }
+
+  titleExist() {
+    cy.contains(text.errorTitleExist).should('be.visible')
+  }
 }
 
-clickSubmitBtn() {
-cy.get('[type="submit"]').click();
-}
-
-createPage(pageTitle) {
-this.setPageTitle(pageTitle)
-this.clickSubmitBtn()
-}
-
-titleExist() {
-cy.contains(text.errorTitleExist).should('be.visible');
-}
-
-}
-
-export default new CreateNewPage();
+export default new CreateNewPage()

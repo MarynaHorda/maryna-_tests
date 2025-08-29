@@ -1,8 +1,6 @@
 class MyAccountPage {
-
-clickChangePasswordBtn () {
-cy.get('.contextual > .icon').click()
+  clickChangePasswordBtn() {
+    cy.get('.contextual > .icon').click()
+  }
 }
-
-}
-export default new MyAccountPage();
+export default new MyAccountPage()
