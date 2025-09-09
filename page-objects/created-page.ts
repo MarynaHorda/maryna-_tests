@@ -1,19 +1,32 @@
 class CreatedPage {
+  
+  getSaveBtn() {
+  return cy.get(':nth-child(6) > input')
+  }
+  
   clickSaveBtn() {
-    cy.get(':nth-child(6) > input').click()
+  this.getSaveBtn().click()
   }
 
-  searchInfo(pageTitle) {
-    cy.get('#q').click().type(pageTitle).type('{enter}')
+  getSearchField() {
+  return cy.get('#q')
+  }
+  
+  searchInfo(pageTitle:string) {
+  this.getSearchField().click().type(pageTitle).type('{enter}')
   }
 
-  verifyTitle(pageUrlTitle) {
-    cy.get('.wiki-page > a').should('have.text', `Wiki: ${pageUrlTitle}`)
+  getTitle() {
+  return cy.get('.wiki-page > a');
   }
 
-  searchAndVerifyPage(pageTitle, pageUrlTitle) {
-    this.searchInfo(pageTitle)
-    this.verifyTitle(pageUrlTitle)
+  verifyTitle(pageUrlTitle: string) {
+  this.getTitle().should('have.text', `Wiki: ${pageUrlTitle}`);
+  }
+
+  searchAndVerifyPage(pageTitle:string, pageUrlTitle:string) {
+  this.searchInfo(pageTitle)
+  this.verifyTitle(pageUrlTitle)
   }
 }
 

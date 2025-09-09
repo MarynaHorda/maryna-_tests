@@ -1,24 +1,44 @@
+import { randomWait } from 'cypress/support/utils';
+
 class ReleasePage {
+  
+  getLeaveComBtn() {
+  return cy.get('#content > :nth-child(7) > a')
+  }
+  
   clickLeaveComBtn() {
-    cy.get('#content > :nth-child(7) > a').click()
+  this.getLeaveComBtn().click()
+  }
+
+  getComField() {
+  return cy.get('#comment_comments')
   }
 
   setComField(text:string) {
-    cy.get('#comment_comments').type(text)
+  this.getComField().type(text)
+  }
+
+  getSendComBtn() {
+  return cy.get('p > input')
   }
 
   clickSendComBtn() {
-    cy.get('p > input').click()
+  this.getSendComBtn().click()
   }
 
   writeAndSendCom(text:string) {
-    this.setComField(text)
-    this.clickSendComBtn()
+  this.setComField(text)
+  randomWait(300, 800);
+  this.clickSendComBtn()
+  }
+
+  getComAdded() {
+  return cy.get('#flash_notice')
   }
 
   verifyComAdded() {
-    cy.get('#flash_notice')
-    cy.contains('Comment added').should('be.visible')
+  this.getComAdded()
+  cy.contains('Comment added').should('be.visible')
   }
 }
 

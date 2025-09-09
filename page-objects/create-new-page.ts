@@ -1,21 +1,32 @@
+import { randomWait } from 'cypress/support/utils';
 import { text } from '../cypress/fixtures/text'
 
 class CreateNewPage {
-  setPageTitle(pageTitle) {
-    cy.get('#page_title').clear().type(pageTitle)
+
+  getPageTitle() {
+  return cy.get('#page_title')
+  }
+
+  setPageTitle(pageTitle:string) {
+  this.getPageTitle().clear().type(pageTitle);
+  }
+
+  getSubmitBtn() {
+  return cy.get('[type="submit"]')
   }
 
   clickSubmitBtn() {
-    cy.get('[type="submit"]').click()
+  this.getSubmitBtn().click();
   }
 
-  createPage(pageTitle) {
-    this.setPageTitle(pageTitle)
-    this.clickSubmitBtn()
+  createPage(pageTitle:string) {
+  this.setPageTitle(pageTitle);
+  randomWait(300, 800);
+  this.clickSubmitBtn();
   }
 
   titleExist() {
-    cy.contains(text.errorTitleExist).should('be.visible')
+  cy.contains(text.errorTitleExist).should('be.visible');
   }
 }
 

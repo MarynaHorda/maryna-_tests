@@ -1,7 +1,9 @@
 node_modules/
+downloads/
 dist/
 coverage/
 .cypress-cache/
+.env
 cypress/screenshots/
 cypress/videos/
 .env

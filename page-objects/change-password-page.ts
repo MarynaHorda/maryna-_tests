@@ -1,30 +1,52 @@
+import { randomWait } from 'cypress/support/utils'
 import { text } from '../cypress/fixtures/text'
+import { getNewPassword, getNewPasswordConfirmation, getPassword } from 'cypress/support/env'
 class ChangePasswordPage {
-  setPassword(password) {
-    cy.get('#password').type(password)
+  
+  getPassword() {
+  return cy.get('#password')
   }
 
-  setNewPassword(newPassword) {
-    cy.get('#new_password').type(newPassword)
+  setPassword(password:string) {
+  this.getPassword().type(password)
   }
 
-  setNewPasswordConfirmation(newPasswordConfirmation) {
-    cy.get('#new_password_confirmation').type(newPasswordConfirmation)
+  getNewPassword() {
+  return cy.get('#new_password')
+  }
+
+  setNewPassword(newPassword:string) {
+  this.getNewPassword().type(newPassword)
+  }
+
+  getNewPasswordConfirmation() {
+  return cy.get('#new_password_confirmation')
+  }
+
+  setNewPasswordConfirmation(newPasswordConfirmation:string) {
+  this.getNewPasswordConfirmation().type(newPasswordConfirmation)
+  }
+
+  getSubmitBtn() {
+  return cy.get('[type="submit"]')
   }
 
   clickSubmitBtn() {
-    cy.get('[type="submit"]').click()
+  this.getSubmitBtn().click()
   }
 
-  changePassword(password, newPassword, newPasswordConfirmation) {
-    this.setPassword(password)
-    this.setNewPassword(newPassword)
-    this.setNewPasswordConfirmation(newPasswordConfirmation)
-    this.clickSubmitBtn()
+  changePassword() {
+  this.setPassword(getPassword());
+  randomWait(300, 800);
+  this.setNewPassword(getNewPassword());
+  randomWait(300, 800);
+  this.setNewPasswordConfirmation(getNewPasswordConfirmation());
+  randomWait(300, 800);
+  this.clickSubmitBtn();
   }
 
   verifyErrorInfo() {
-    cy.contains(text.errorNewPassword).should('be.visible')
+  cy.contains(text.errorNewPassword).should('be.visible')
   }
 }
 

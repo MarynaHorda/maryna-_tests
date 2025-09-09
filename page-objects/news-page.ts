@@ -1,6 +1,11 @@
 class NewsPage {
+  
+  getOnRelease() {
+  return cy.get(':nth-child(4) > header > h3 > a')
+  }
+  
   clickOnRelease() {
-    cy.get(':nth-child(4) > header > h3 > a').click()
+  this.getOnRelease().click()
   }
 }
 

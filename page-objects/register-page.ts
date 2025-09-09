@@ -1,51 +1,88 @@
 import { text } from "cypress/fixtures/text"
+import { getFirstName, getLastName, getLogin, getMail, getPassword, getPasswordConfirmation } from "cypress/support/env";
+import { randomWait } from "cypress/support/utils"
 
 class RegisterPage {
+  
+  getUserLogin() {
+  return cy.get('#user_login')
+  }
+  
   setUserLogin(login:string) {
-    cy.get('#user_login').type(login)
+  this.getUserLogin().type(login);
+  }
+
+  getUserPassword() {
+  return cy.get('#user_password')
   }
 
   setUserPassword(password:string) {
-    cy.get('#user_password').type(password)
+  this.getUserPassword().type(password);
+  }
+
+  getUserPasswordConfirmation() {
+  return cy.get('#user_password_confirmation')
   }
 
   setUserPasswordConfirmation(passwordConfirmation:string) {
-    cy.get('#user_password_confirmation').type(passwordConfirmation)
+  this.getUserPasswordConfirmation().type(passwordConfirmation);
+  }
+
+  getUserFirstName() {
+  return cy.get('#user_firstname')
   }
 
   setUserFirstName(firstName:string) {
-    cy.get('#user_firstname').type(firstName)
+  this.getUserFirstName().type(firstName);
+  }
+
+  getUserLastName() {
+  return cy.get('#user_lastname')
   }
 
   setUserLastName(lastName:string) {
-    cy.get('#user_lastname').type(lastName)
+  this.getUserLastName().type(lastName);
+  }
+
+  getUserMail() {
+  return cy.get('#user_mail')
   }
 
   setUserMail(mail:string) {
-    cy.get('#user_mail').type(mail)
+  this.getUserMail().type(mail);
+  }
+
+  getSubmitBtn() {
+  return cy.get('[type="submit"]')
   }
 
   clickSubmitBtn() {
-    cy.get('[type="submit"]').click()
+  this.getSubmitBtn().click();
   }
 
   verifyMailInfo() {
-    cy.contains(text.errorMailExist).should('be.visible')
+  cy.contains(text.errorMailExist).should('be.visible');
   }
 
   veryfiLogininfo() {
-    cy.contains(text.errorLoginExist).should('be.visible')
+  cy.contains(text.errorLoginExist).should('be.visible');
   }
 
-  register(login:string, password:string, passwordConfirmation:string, firstName:string, lastName:string, mail:string) {
-    this.setUserLogin(login)
-    this.setUserPassword(password)
-    this.setUserPasswordConfirmation(passwordConfirmation)
-    this.setUserFirstName(firstName)
-    this.setUserLastName(lastName)
-    this.setUserMail(mail)
-    this.clickSubmitBtn()
-  }
+  register() {
+  this.setUserLogin(getLogin());
+  randomWait(300, 800);
+  this.setUserPassword(getPassword());
+  randomWait(300, 800);
+  this.setUserPasswordConfirmation(getPasswordConfirmation());
+  randomWait(300, 800);
+  this.setUserFirstName(getFirstName());
+  randomWait(300, 800);
+  this.setUserLastName(getLastName());
+  randomWait(300, 800);
+  this.setUserMail(getMail());
+  randomWait(300, 800);
+  this.clickSubmitBtn();
+}
 }
 
 export default new RegisterPage()

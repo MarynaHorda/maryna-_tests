@@ -1,22 +1,35 @@
 import { text } from '../cypress/fixtures/text'
 
 class CreateNewQuestion {
+  
+  getCommitBtn() {
+  return cy.get('[name="commit"]');
+  }
+  
   clickCommitBtn() {
-    cy.get('[name="commit"]').click()
+  this.getCommitBtn().click();
+  }
+
+  getError() {
+  return cy.get('#errorExplanation');
   }
 
   verifyError() {
-    cy.get('#errorExplanation')
-    cy.contains(text.errorEmptyTitle).should('be.visible')
+  this.getError();
+  cy.contains(text.errorEmptyTitle).should('be.visible');
   }
 
+  getErrorField() {
+  return cy.get('label[for="issue_subject"]')
+  }
+  
   highlightErrorField() {
-    cy.get('label[for="issue_subject"]').should('have.class', 'error')
+  this.getErrorField().should('have.class', 'error');
   }
 
   checkErrorAndField() {
-    this.verifyError()
-    this.highlightErrorField()
+  this.verifyError()
+  this.highlightErrorField()
   }
 }
 export default new CreateNewQuestion()

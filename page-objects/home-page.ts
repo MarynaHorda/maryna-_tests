@@ -1,26 +1,51 @@
 class HomePage {
+  
+  getLoginBtn() {
+  return cy.get('.login')
+  }
+  
   clickLoginBtn() {
-    cy.get('.login').click()
+  this.getLoginBtn().click()
   }
 
+  getRegisterBtn() {
+  return cy.get('.register')
+  }
+  
   clickRegisterBtn() {
-    cy.get('.register').click()
+  this.getRegisterBtn().click()
   }
 
+  getVerifyLoginBtn() {
+  return cy.get('.login')
+  }
+  
   verifyLoginBtn() {
-    cy.get('.login').should('have.text', 'Sign in')
+  this.getVerifyLoginBtn().should('have.text', 'Sign in')
+  }
+
+  getVerifyRegisterBtn() {
+  return cy.get('.register')
   }
 
   verifyRegisterBtn() {
-    cy.get('.register').should('have.text', 'Register')
+  this.getVerifyRegisterBtn().should('have.text', 'Register')
   }
 
-  searchInfo(info) {
-    cy.get('#q').type(info).type('{enter}')
+  getSearchField() {
+  return cy.get('#q')
+  }
+  
+  searchInfo(info:string) {
+  this.getSearchField().type(info).type('{enter}')
   }
 
+  getActivityBtn() {
+  return cy.get('.activity')
+  }
+  
   clickActivityBtn() {
-    cy.get('.activity').click()
+  this.getActivityBtn().click()
   }
 
   open() {

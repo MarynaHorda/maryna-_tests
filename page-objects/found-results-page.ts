@@ -1,42 +1,66 @@
+import { randomWait } from "cypress/support/utils";
+
 class FoundResultsPage {
+  
+  getCheckboxTitlesOnly() {
+  return cy.get('#titles_only')
+  }
+  
   checkboxTitlesOnly() {
-    cy.get('#titles_only').check()
+  this.getCheckboxTitlesOnly().check()
   }
 
+  getCheckboxNews() {
+  return cy.get('#news')
+  }
+  
   checkboxNews() {
-    cy.get('#news').check()
+  this.getCheckboxNews().check()
   }
 
+  getSearchBtn() {
+  return cy.get('#search-form > :nth-child(3) > input')
+  }
+  
   clickSearchBtn() {
-    cy.get('#search-form > :nth-child(3) > input').click()
+  this.getSearchBtn().click()
   }
 
   filter() {
-    this.checkboxTitlesOnly()
-    this.checkboxNews()
-    this.clickSearchBtn()
+  this.checkboxTitlesOnly()
+  randomWait(300, 800);
+  this.checkboxNews()
+  randomWait(300, 800);
+  this.clickSearchBtn()
+  }
+
+  getTitle() {
+  return cy.get('#content > h3')
+  }
+  
+  getDescriptionList() {
+  return cy.get('dt')
   }
 
   verifyAmount() {
-    cy.get('#content > h3').should('have.text', 'Results (1)')
-    cy.get('dt')
-      .its('length')
-      .then((amount) => {
-        cy.log('Results: ' + amount)
-        expect(amount).to.equal(1)
-      })
+  this.getTitle().should('have.text', 'Results (1)')
+  this.getDescriptionList().its('length').then((amount) => {
+  cy.log('Results: ' + amount)
+  expect(amount).to.equal(1)
+  })
+  }
+
+  getFoundTitle() {
+  return cy.get('.news > a')
   }
 
   verifyFoundTitle() {
-    cy.get('.news > a').should(
-      'have.text',
-      'Redmine 6.0.6, 5.1.9 and 5.0.13 released'
-    )
+  this.getFoundTitle().should('have.text','Redmine 6.0.6, 5.1.9 and 5.0.13 released')
   }
 
   verifyAmountAndTitle() {
-    this.verifyAmount()
-    this.verifyFoundTitle()
+  this.verifyAmount()
+  this.verifyFoundTitle()
   }
 }
 export default new FoundResultsPage()

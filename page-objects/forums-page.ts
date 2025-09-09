@@ -1,6 +1,11 @@
 class ForumsPage {
+  
+  getHelpBtn() {
+  return cy.get(':nth-child(2) > .name > .board')
+  }
+  
   clickHelpBtn() {
-    cy.get(':nth-child(2) > .name > .board').click()
+  this.getHelpBtn().click()
   }
 }
 

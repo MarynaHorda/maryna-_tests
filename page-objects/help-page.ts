@@ -1,6 +1,11 @@
 class HelpPage {
+  
+  getIwreBtn() {
+  return cy.get('#message-71040 > .subject > a')
+  }
+
   clickIwreBtn() {
-    cy.get('#message-71040 > .subject > a').click()
+  this.getIwreBtn().click()
   }
 }
 

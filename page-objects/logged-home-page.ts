@@ -1,48 +1,89 @@
+import { randomWait } from "cypress/support/utils"
+
 class LoggedHomePage {
+  
+  getLogoutBtn() {
+  return cy.get('.logout')
+  }
+  
   clickLogoutBtn() {
-    cy.get('.logout').click()
+  this.getLogoutBtn().click();
+  }
+
+  getLoggedAsText() {
+  return cy.get('#loggedas')
   }
 
   verifyLoggedAsText() {
-    cy.get('#loggedas').should('have.text', 'Logged in as Barabulka2003')
+  this.getLoggedAsText().should('have.text', 'Logged in as Barabulka1945');
+  }
+
+  getVerifyLogoutBtn() {
+  return cy.get('.logout')
   }
 
   verifyLogoutBtn() {
-    cy.get('.logout').should('have.text', 'Sign out')
+  this.getVerifyLogoutBtn().should('have.text', 'Sign out');
+  }
+
+  getNewObjectBtn() {
+  return cy.get('#new-object')
   }
 
   clickNewObjectBtn() {
-    cy.get('#new-object').click()
+  this.getNewObjectBtn().click();
+  }
+
+  getNewWikiPageBtn() {
+  return cy.get('.new-wiki-page')
   }
 
   clickNewWikiPageBtn() {
-    cy.get('.new-wiki-page').click()
+  this.getNewWikiPageBtn().click();
+  }
+
+  getNewQstBtn() {
+  return cy.get('.new-issue-sub')
   }
 
   clickNewQstBtn() {
-    cy.get('.new-issue-sub').click()
+  this.getNewQstBtn().click();
+  }
+
+  getNewsBtn() {
+  return cy.get('.news')
   }
 
   clickNewsBtn() {
-    cy.get('.news').click()
+  this.getNewsBtn().click();
   }
 
   createNewPage() {
-    this.clickNewObjectBtn()
-    this.clickNewWikiPageBtn()
+  this.clickNewObjectBtn();
+  randomWait(300, 800);
+  this.clickNewWikiPageBtn();
   }
 
   createNewQst() {
-    this.clickNewObjectBtn()
-    this.clickNewQstBtn()
+  this.clickNewObjectBtn();
+  randomWait(300, 800);
+  this.clickNewQstBtn();
+  }
+
+  getBoardsBtn() {
+  return cy.get('.boards')
   }
 
   clickBoardsBtn() {
-    cy.get('.boards').click()
+  this.getBoardsBtn().click();
+  }
+
+  getMyAccountBtn() {
+  return cy.get('.my-account')
   }
 
   clickMyAccountBtn() {
-    cy.get('.my-account').click()
+  this.getMyAccountBtn().click();
   }
 }
 
