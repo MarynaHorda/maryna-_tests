@@ -1,88 +1,62 @@
-import { text } from "cypress/fixtures/text"
-import { getFirstName, getLastName, getLogin, getMail, getPassword, getPasswordConfirmation } from "cypress/support/env";
-import { randomWait } from "cypress/support/utils"
+import { text } from 'cypress/fixtures/text'
+import {
+  getFirstName,
+  getInvalidMail,
+  getLastName,
+  getLogin,
+  getMail,
+  getPassword,
+  getPasswordConfirmation,
+  getUniqueLogin,
+} from 'cypress/support/env'
 
 class RegisterPage {
-  
-  getUserLogin() {
-  return cy.get('#user_login')
-  }
-  
-  setUserLogin(login:string) {
-  this.getUserLogin().type(login);
-  }
-
-  getUserPassword() {
-  return cy.get('#user_password')
-  }
-
-  setUserPassword(password:string) {
-  this.getUserPassword().type(password);
-  }
-
-  getUserPasswordConfirmation() {
-  return cy.get('#user_password_confirmation')
-  }
-
-  setUserPasswordConfirmation(passwordConfirmation:string) {
-  this.getUserPasswordConfirmation().type(passwordConfirmation);
-  }
-
-  getUserFirstName() {
-  return cy.get('#user_firstname')
-  }
-
-  setUserFirstName(firstName:string) {
-  this.getUserFirstName().type(firstName);
-  }
-
-  getUserLastName() {
-  return cy.get('#user_lastname')
-  }
-
-  setUserLastName(lastName:string) {
-  this.getUserLastName().type(lastName);
-  }
-
-  getUserMail() {
-  return cy.get('#user_mail')
-  }
-
-  setUserMail(mail:string) {
-  this.getUserMail().type(mail);
-  }
-
-  getSubmitBtn() {
-  return cy.get('[type="submit"]')
-  }
-
-  clickSubmitBtn() {
-  this.getSubmitBtn().click();
-  }
-
-  verifyMailInfo() {
-  cy.contains(text.errorMailExist).should('be.visible');
-  }
-
-  veryfiLogininfo() {
-  cy.contains(text.errorLoginExist).should('be.visible');
-  }
+  loginField = () => cy.get('#user_login')
+  passwordField = () => cy.get('#user_password')
+  confirmField = () => cy.get('#user_password_confirmation')
+  firstNameField = () => cy.get('#user_firstname')
+  lastNameField = () => cy.get('#user_lastname')
+  mailField = () => cy.get('#user_mail')
+  submitBtn = () => cy.get('input[type="submit"]')
+  errorContainer = () => cy.get('#errorExplanation')
 
   register() {
-  this.setUserLogin(getLogin());
-  randomWait(300, 800);
-  this.setUserPassword(getPassword());
-  randomWait(300, 800);
-  this.setUserPasswordConfirmation(getPasswordConfirmation());
-  randomWait(300, 800);
-  this.setUserFirstName(getFirstName());
-  randomWait(300, 800);
-  this.setUserLastName(getLastName());
-  randomWait(300, 800);
-  this.setUserMail(getMail());
-  randomWait(300, 800);
-  this.clickSubmitBtn();
-}
+    this.loginField().type(getLogin())
+    this.passwordField().type(getPassword())
+    this.confirmField().type(getPasswordConfirmation())
+    this.firstNameField().type(getFirstName())
+    this.lastNameField().type(getLastName())
+    this.mailField().type(getMail())
+    this.submitBtn().click()
+  }
+
+  registerWithInvalidMail() {
+    this.loginField().type(getUniqueLogin())
+    this.passwordField().type(getPassword())
+    this.confirmField().type(getPasswordConfirmation())
+    this.firstNameField().type(getFirstName())
+    this.lastNameField().type(getLastName())
+    this.mailField().type(getInvalidMail())
+    this.submitBtn().click()
+  }
+
+  verifyMailError() {
+    this.errorContainer()
+      .should('be.visible')
+      .and('contain', text.errorMailExist)
+  }
+
+  verifyLoginError() {
+    this.errorContainer()
+      .should('be.visible')
+      .and('contain', text.errorLoginExist)
+  }
+
+  verifyMailInvalidError() {
+    this.errorContainer()
+      .should('be.visible')
+      .and('contain', text.errorMailInvalid)
+  }
 }
 
 export default new RegisterPage()

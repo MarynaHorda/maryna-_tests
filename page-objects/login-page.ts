@@ -1,43 +1,43 @@
-import { getPassword, getUserName } from "cypress/support/env";
-import { randomWait } from "cypress/support/utils";
+import { getUserName, getPassword, getTwoFaCodes } from 'cypress/support/env'
+import homePage from './home-page'
 
 class LoginPage {
-  
-  getLoginSubmitBtn() {
-  return cy.get('#login-submit')
+  userNameField = () => cy.get('#username')
+  passwordField = () => cy.get('#password')
+  loginSubmitBtn = () => cy.get('#login-submit')
+  twoFACodeField = () => cy.get('#twofa_code')
+  lostPasswordBtn = () => cy.get('.lost_password')
+
+  trySubmitTwoFaCodes(codes: string[]) {
+    const idx = Cypress.env('currentCodeIndex') || 0
+    if (idx >= codes.length) throw new Error('No valid 2FA codes left')
+
+    this.twoFACodeField().type(codes[idx])
+    this.loginSubmitBtn().click()
+    Cypress.env('currentCodeIndex', idx + 1)
+
+    cy.get('body', { timeout: 5000 }).then(($body) => {
+      if ($body.find('#twofa_code').length) {
+        this.trySubmitTwoFaCodes(codes)
+      } else if ($body.find('#flash_error').text().includes('Too many tries')) {
+        cy.wait(3000)
+        this.loginDefaultUser()
+      }
+    })
   }
 
-  clickLoginSubmitBtn() {
-  this.getLoginSubmitBtn().click()
-  }
+  loginDefaultUser() {
+    homePage.loginBtn().click()
+    cy.url().should('include', '/login')
+    this.userNameField().type(getUserName())
+    this.passwordField().type(getPassword())
+    this.loginSubmitBtn().click()
 
-  getUserName() {
-  return cy.get('#username')
-  }
-
-  setUserName(name: string) {
-  this.getUserName().type(name);
-  }
-
-  getPassword() {
-  return cy.get('#password')
-  }
-
-  setPassword(password: string) {
-  this.getPassword().type(password);
-  }
-
-  verifyUrl() {
-  cy.url().should('include', '/login')
-  }
-
-  login() {
-  this.setUserName(getUserName());
-  randomWait(300, 800);
-  this.setPassword(getPassword());
-  randomWait(300, 800);
-  this.clickLoginSubmitBtn();
-  randomWait(300, 800);
+    cy.get('body').then(($body) => {
+      if ($body.find('#twofa_code').length) {
+        this.trySubmitTwoFaCodes(getTwoFaCodes())
+      }
+    })
   }
 }
 

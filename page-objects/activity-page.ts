@@ -1,31 +1,16 @@
-import { randomWait } from 'cypress/support/utils';
-import { text } from '../cypress/fixtures/text'
+import { text } from 'cypress/fixtures/text'
+
 class ActivityPage {
-  
-  getDate() {
-  return cy.get('#from')
-  }
-  
-  setDate(date:string) {
-  this.getDate().type(date)
-  }
+  dateField = () => cy.get('#from')
+  applyBtn = () => cy.get('.button-small')
 
-  getApplyBtn() {
-  return cy.get('.button-small')
-  }
-
-  clickApplyBtn() {
-  this.getApplyBtn().click()
+  searchByDate(date: string) {
+    this.dateField().clear().type(date)
+    this.applyBtn().click()
   }
 
   verifyNoData() {
-  cy.contains(text.errorNoData).should('be.visible')
-  }
-
-  searchDate(date:string) {
-  this.setDate(date);
-  randomWait(300, 800);
-  this.clickApplyBtn();
+    cy.get('#content').should('contain', text.errorNoData).and('be.visible')
   }
 }
 

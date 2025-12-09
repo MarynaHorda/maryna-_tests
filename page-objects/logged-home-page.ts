@@ -1,89 +1,33 @@
-import { randomWait } from "cypress/support/utils"
-
 class LoggedHomePage {
-  
-  getLogoutBtn() {
-  return cy.get('.logout')
-  }
-  
-  clickLogoutBtn() {
-  this.getLogoutBtn().click();
+  logoutBtn = () => cy.get('.logout')
+  loggedAsText = () => cy.get('#loggedas')
+  newObjectBtn = () => cy.get('#new-object')
+  newWikiPageBtn = () => cy.get('.new-wiki-page')
+  newQstBtn = () => cy.get('.new-issue-sub')
+  myAccountBtn = () => cy.get('.my-account')
+  forumsBtn = () => cy.get('.boards')
+
+  logout() {
+    cy.get('body').then(($body) => {
+      if ($body.find('.logout').length) {
+        this.logoutBtn().click()
+      }
+    })
   }
 
-  getLoggedAsText() {
-  return cy.get('#loggedas')
-  }
-
-  verifyLoggedAsText() {
-  this.getLoggedAsText().should('have.text', 'Logged in as Barabulka1945');
-  }
-
-  getVerifyLogoutBtn() {
-  return cy.get('.logout')
-  }
-
-  verifyLogoutBtn() {
-  this.getVerifyLogoutBtn().should('have.text', 'Sign out');
-  }
-
-  getNewObjectBtn() {
-  return cy.get('#new-object')
-  }
-
-  clickNewObjectBtn() {
-  this.getNewObjectBtn().click();
-  }
-
-  getNewWikiPageBtn() {
-  return cy.get('.new-wiki-page')
-  }
-
-  clickNewWikiPageBtn() {
-  this.getNewWikiPageBtn().click();
-  }
-
-  getNewQstBtn() {
-  return cy.get('.new-issue-sub')
-  }
-
-  clickNewQstBtn() {
-  this.getNewQstBtn().click();
-  }
-
-  getNewsBtn() {
-  return cy.get('.news')
-  }
-
-  clickNewsBtn() {
-  this.getNewsBtn().click();
+  verifyLoggedState(userName: string) {
+    this.loggedAsText().should('have.text', `Logged in as ${userName}`)
+    this.logoutBtn().should('be.visible')
   }
 
   createNewPage() {
-  this.clickNewObjectBtn();
-  randomWait(300, 800);
-  this.clickNewWikiPageBtn();
+    this.newObjectBtn().click()
+    this.newWikiPageBtn().click()
   }
 
   createNewQst() {
-  this.clickNewObjectBtn();
-  randomWait(300, 800);
-  this.clickNewQstBtn();
-  }
-
-  getBoardsBtn() {
-  return cy.get('.boards')
-  }
-
-  clickBoardsBtn() {
-  this.getBoardsBtn().click();
-  }
-
-  getMyAccountBtn() {
-  return cy.get('.my-account')
-  }
-
-  clickMyAccountBtn() {
-  this.getMyAccountBtn().click();
+    this.newObjectBtn().click()
+    this.newQstBtn().click()
   }
 }
 

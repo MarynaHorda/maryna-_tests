@@ -1,55 +1,23 @@
 class HomePage {
-  
-  getLoginBtn() {
-  return cy.get('.login')
-  }
-  
-  clickLoginBtn() {
-  this.getLoginBtn().click()
+  loginBtn = () => cy.get('.login')
+  registerBtn = () => cy.get('.register')
+  searchField = () => cy.get('#q')
+  activityBtn = () => cy.get('.activity')
+  actionsBtn = () => cy.get('span.icon-only.icon-actions[title="Actions"]')
+  historyBtn = () => cy.get('a.icon-history').contains('History')
+  changelogLink = () => cy.get('a[href="/projects/redmine/wiki/Changelog"]').contains('Changelog').first()
+
+  openHistory() {
+    this.actionsBtn().click()
+    this.historyBtn().click()
   }
 
-  getRegisterBtn() {
-  return cy.get('.register')
-  }
-  
-  clickRegisterBtn() {
-  this.getRegisterBtn().click()
-  }
-
-  getVerifyLoginBtn() {
-  return cy.get('.login')
-  }
-  
-  verifyLoginBtn() {
-  this.getVerifyLoginBtn().should('have.text', 'Sign in')
-  }
-
-  getVerifyRegisterBtn() {
-  return cy.get('.register')
-  }
-
-  verifyRegisterBtn() {
-  this.getVerifyRegisterBtn().should('have.text', 'Register')
-  }
-
-  getSearchField() {
-  return cy.get('#q')
-  }
-  
-  searchInfo(info:string) {
-  this.getSearchField().type(info).type('{enter}')
-  }
-
-  getActivityBtn() {
-  return cy.get('.activity')
-  }
-  
-  clickActivityBtn() {
-  this.getActivityBtn().click()
+  searchInfo(info: string) {
+    this.searchField().type(`${info}{enter}`)
   }
 
   open() {
-    cy.visit('https://www.redmine.org')
+    cy.visit('/')
   }
 }
 

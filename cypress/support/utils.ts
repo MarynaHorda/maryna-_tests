@@ -1,5 +1,13 @@
-export function randomWait(min: number = 1000, max: number = 3000): void {
-  const waitTime = Math.floor(Math.random() * (max - min + 1)) + min;
-  cy.wait(waitTime);
-}
+export function generateRandomFutureDate(): string {
+  const randomDays = Math.floor(Math.random() * 335) + 30
 
+  const futureDate = new Date()
+
+  futureDate.setDate(futureDate.getDate() + randomDays)
+
+  const year = futureDate.getFullYear()
+  const month = String(futureDate.getMonth() + 1).padStart(2, '0')
+  const day = String(futureDate.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}

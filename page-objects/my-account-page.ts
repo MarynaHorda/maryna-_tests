@@ -1,11 +1,5 @@
 class MyAccountPage {
-  
-  getChangePasswordBtn() {
-  return cy.get('.contextual > .icon')
-  }
-  
-  clickChangePasswordBtn() {
-  this.getChangePasswordBtn().click()
-  }
+  changePasswordBtn = () => cy.get('.contextual > .icon')
 }
+
 export default new MyAccountPage()

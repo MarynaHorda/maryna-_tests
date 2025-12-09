@@ -1,12 +1,5 @@
 class HelpPage {
-  
-  getIwreBtn() {
-  return cy.get('#message-71040 > .subject > a')
-  }
-
-  clickIwreBtn() {
-  this.getIwreBtn().click()
-  }
+  issuesWithReceivingEmails = () => cy.get('#message-71040 > .subject > a')
 }
 
 export default new HelpPage()

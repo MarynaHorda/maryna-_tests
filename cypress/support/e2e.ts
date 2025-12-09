@@ -1,4 +1,6 @@
-import homePage from "page-objects/home-page";
+import homePage from 'page-objects/home-page'
+
+Cypress.env('currentCodeIndex', 0)
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // Запобігає фейлу тесту, якщо JS-помилка на сайті
@@ -6,10 +8,8 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 })
 
 beforeEach(() => {
-  homePage.open();
+  homePage.open()
   cy.intercept('**', (req) => {
-    req.headers['accept-language'] = 'en-US,en;q=0.9';
-  });
-});
-
-
+    req.headers['accept-language'] = 'en-US,en;q=0.9'
+  })
+})

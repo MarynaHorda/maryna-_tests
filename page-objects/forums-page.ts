@@ -1,12 +1,5 @@
 class ForumsPage {
-  
-  getHelpBtn() {
-  return cy.get(':nth-child(2) > .name > .board')
-  }
-  
-  clickHelpBtn() {
-  this.getHelpBtn().click()
-  }
+  helpBtn = () => cy.get('a.board').contains('Help')
 }
 
 export default new ForumsPage()
