@@ -22,23 +22,23 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           command: npx cypress run
-          env:
-    CYPRESS_baseUrl: ${{ secrets.CYPRESS_baseUrl }}
-    CYPRESS_userName: ${{ secrets.CYPRESS_userName }}
-    CYPRESS_password: ${{ secrets.CYPRESS_password }}
-    CYPRESS_firstName: ${{ secrets.CYPRESS_firstName }}
-    CYPRESS_lastName: ${{ secrets.CYPRESS_lastName }}
-    CYPRESS_mail: ${{ secrets.CYPRESS_mail }}
-    CYPRESS_login: ${{ secrets.CYPRESS_login }}
-    CYPRESS_passwordConfirmation: ${{ secrets.CYPRESS_passwordConfirmation }}
-    CYPRESS_newPassword: ${{ secrets.CYPRESS_newPassword }}
-    CYPRESS_newPasswordConfirmation: ${{ secrets.CYPRESS_newPasswordConfirmation }}
+        env:
+          CYPRESS_baseUrl: ${{ secrets.CYPRESS_baseUrl }}
+          CYPRESS_userName: ${{ secrets.CYPRESS_userName }}
+          CYPRESS_password: ${{ secrets.CYPRESS_password }}
+          CYPRESS_firstName: ${{ secrets.CYPRESS_firstName }}
+          CYPRESS_lastName: ${{ secrets.CYPRESS_lastName }}
+          CYPRESS_mail: ${{ secrets.CYPRESS_mail }}
+          CYPRESS_login: ${{ secrets.CYPRESS_login }}
+          CYPRESS_passwordConfirmation: ${{ secrets.CYPRESS_passwordConfirmation }}
+          CYPRESS_newPassword: ${{ secrets.CYPRESS_newPassword }}
+          CYPRESS_newPasswordConfirmation: ${{ secrets.CYPRESS_newPasswordConfirmation }}
 
-     - name: Upload artifacts (screenshots & videos)
-  if: ${{ failure() }}
-  uses: actions/upload-artifact@v4
-  with:
-    name: cypress-artifacts
-    path: |
-      cypress/screenshots
-      cypress/videos
+      - name: Upload artifacts (screenshots & videos)
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
