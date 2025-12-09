@@ -33,6 +33,10 @@ jobs:
           CYPRESS_passwordConfirmation: ${{ secrets.CYPRESS_passwordConfirmation }}
           CYPRESS_newPassword: ${{ secrets.CYPRESS_newPassword }}
           CYPRESS_newPasswordConfirmation: ${{ secrets.CYPRESS_newPasswordConfirmation }}
+          CYPRESS_twoFaCodes: ${{ secrets.CYPRESS_twoFaCodes }}
+          CYPRESS_invalidMail: ${{ secrets.CYPRESS_invalidMail }}
+          CYPRESS_uniqueLogin: ${{ secrets.CYPRESS_uniqueLogin }}
+          
 
       - name: Upload artifacts (screenshots & videos)
         if: ${{ failure() }}
